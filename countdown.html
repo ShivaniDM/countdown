@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #2f3437; color: white; font-family: -apple-system, BlinkMacSystemFont, sans-serif; }
+        .countdown { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 1rem; }
+        .unit { text-align: center; }
+        .number { font-size: 2rem; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="countdown"></div>
+    <script>
+        function updateCountdown() {
+            const examDate = new Date('2024-12-28T20:00:00+05:30');
+            const now = new Date();
+            const diff = examDate - now;
+            
+            const units = {
+                Days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+                Hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                Minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+                Seconds: Math.floor((diff % (1000 * 60)) / 1000)
+            };
+
+            document.querySelector('.countdown').innerHTML = Object.entries(units)
+                .map(([unit, value]) => `<div class="unit"><div class="number">${value}</div>${unit}</div>`)
+                .join('');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
